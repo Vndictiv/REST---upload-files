@@ -38,18 +38,16 @@ public class LocalStorageController {
     private ServletContext servletContext; //dla ścieżki plików - ścieżka tymaczasowa
     private String uploads; //ścieżka
 
-    //@Autowired //nie jest wymagana adnotacja.
     public LocalStorageController(ServletContext servletContext) {
         this.servletContext = servletContext;
         createContextDirectory();
     }
 
-    //metoda tworząca folder, gdy nie istnieje. Uruchamiana wraz ładowaniem aplikacji.
     private void createContextDirectory() {
         uploads = servletContext.getRealPath("/uploads/");
         LOGGER.log(Level.INFO, uploads);
         Path path = Paths.get(uploads);
-        //if directory exists?
+       
         if (!Files.exists(path)) {
             try {
                 Files.createDirectories(path);
